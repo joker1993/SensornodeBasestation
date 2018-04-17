@@ -41,6 +41,7 @@
 #include "can.h"
 #include "i2c.h"
 #include "usart.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
@@ -65,8 +66,8 @@ static CanTxMsgTypeDef txMessage;
 static CanRxMsgTypeDef rxMessage;
 static CAN_FilterConfTypeDef  filterConfig;
 
-uint8_t lock1 = 1;
-uint8_t lock2 = 1;
+uint8_t timer2Lock = 1;
+uint8_t canLock = 1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -78,6 +79,7 @@ static void MX_NVIC_Init(void);
 void esp8266Init();
 void canInit();
 void i2cInit();
+void timerInit();
 void CANFilter(CAN_FilterConfTypeDef *filter);
 float readTemperature();
 uint8_t readHumidity();
@@ -117,6 +119,7 @@ int main(void)
   MX_CAN1_Init();
   MX_I2C1_Init();
   MX_LPUART1_UART_Init();
+  MX_TIM2_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
@@ -125,25 +128,26 @@ int main(void)
   esp8266Init();
   canInit();
   i2cInit();
+  timerInit();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (lock1 == 0){
+	  if (timer2Lock == 0){
 		  temperature = readTemperature();
-		  send("sensornode/1/temperature", temperature);
-
-		  readCan();
-	  	  lock1 = 1;
-	  }
-	  if (lock2 == 0){
 		  humidity = readHumidity();
+		  send("sensornode/1/temperature", temperature);
 		  send("sensornode/1/humidity", humidity);
 
+		  timer2Lock = 1;
+	  }
+
+	  if (canLock == 0){
 		  readCan();
-		  lock2 = 1;
+
+		  canLock = 1;
 	  }
   /* USER CODE END WHILE */
 
@@ -249,6 +253,11 @@ void canInit()
 void i2cInit()
 {
 	HAL_I2C_Mem_Read(&hi2c1, SHT_ADDRESS, SHT_MEASURE_COMMAND, 2, shtMeasureData, 5, 1000); // read from SHT sensor
+}
+
+void timerInit()
+{
+	HAL_TIM_Base_Start_IT(&htim2);
 }
 
 void CANFilter(CAN_FilterConfTypeDef *filter)

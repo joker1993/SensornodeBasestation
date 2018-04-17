@@ -29,11 +29,14 @@ Src/main.o: ../Src/main.c \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
+ C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h \
+ C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/can.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/i2c.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/usart.h \
+ C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/tim.h \
  C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/gpio.h
 
 C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/main.h:
@@ -96,6 +99,10 @@ C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/S
 
 C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
 
+C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h:
+
+C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
+
 C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 
 C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
@@ -105,5 +112,7 @@ C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/can.h
 C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/i2c.h:
 
 C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/usart.h:
+
+C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/tim.h:
 
 C:/Users/Kristof/Documents/STM32L496RE_workspace/SensornodeBasestation/Inc/gpio.h:

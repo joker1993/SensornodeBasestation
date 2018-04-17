@@ -36,13 +36,14 @@
 #include "stm32l4xx_it.h"
 
 /* USER CODE BEGIN 0 */
-extern uint8_t lock1;
-extern uint8_t lock2;
+extern uint8_t timer2Lock;
+extern uint8_t canLock;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
 extern UART_HandleTypeDef hlpuart1;
+extern TIM_HandleTypeDef htim2;
 
 /******************************************************************************/
 /*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
@@ -222,13 +223,22 @@ void CAN1_RX0_IRQHandler(void)
   HAL_CAN_IRQHandler(&hcan1);
   /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
   HAL_CAN_Receive_IT(&hcan1,CAN_FIFO0);
-  if (hcan1.pRxMsg->Data[2] == 't'){
-	  lock1 = 0;
-  }
-  if (hcan1.pRxMsg->Data[2] == 'h'){
-	  lock2 = 0;
-  }
+  canLock = 0;
   /* USER CODE END CAN1_RX0_IRQn 1 */
+}
+
+/**
+* @brief This function handles TIM2 global interrupt.
+*/
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+  timer2Lock = 0;
+  /* USER CODE END TIM2_IRQn 1 */
 }
 
 /**
