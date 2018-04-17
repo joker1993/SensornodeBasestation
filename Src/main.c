@@ -46,6 +46,7 @@
 /* USER CODE BEGIN Includes */
 #include <string.h>
 
+#define NODEID 1 // id of sensornode
 #define SHT_ADDRESS (0x44 << 1) // I2C address of SHT31-DIS-B sensor
 #define SHT_MEASURE_COMMAND 0x2400 // measurement command for SHT31-DIS-B sensor
 /* USER CODE END Includes */
@@ -305,20 +306,30 @@ uint8_t readHumidity()
 
 float readCan()
 {
-	char data[10];
-	float temperature;
-	int8_t humidity;
+	// format of received string: <node id>, <sensor type (t-temperature, h-humidity)>, <sensor value>
+	char receiveString[30]; // message from another sensor node
+	char data[5]; // sensor value
+	char dataName; // sensor type (t-temperature, h-humidity)
+	char* subString; // for split message
+	uint8_t nodeId; // id of sender node
+	float temperature; // value of temperature
+	int8_t humidity; // value of humidity
 
-	strcpy(data, (char *)hcan1.pRxMsg->Data);
-	switch (data[0])
+	strcpy(receiveString, (char *)hcan1.pRxMsg->Data);
+	subString = strtok(receiveString, ",");
+	nodeId = (uint8_t)*subString;
+	subString = strtok(NULL, ",");
+	dataName = *subString;
+	subString = strtok(NULL, ",");
+	strcpy(data, subString);
+
+	switch (dataName)
 	{
 		case 't':
-			strcpy(data, data+2);
 			sscanf(data, "%f", (float *)&temperature);
 			return temperature;
 			break;
 		case 'h':
-			strcpy(data, data+2);
 			sscanf(data, "%d", (int *)&humidity);
 			return humidity;
 			break;

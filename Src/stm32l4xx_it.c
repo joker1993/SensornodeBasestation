@@ -222,10 +222,10 @@ void CAN1_RX0_IRQHandler(void)
   HAL_CAN_IRQHandler(&hcan1);
   /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
   HAL_CAN_Receive_IT(&hcan1,CAN_FIFO0);
-  if (hcan1.pRxMsg->Data[0] == 't'){
+  if (hcan1.pRxMsg->Data[2] == 't'){
 	  lock1 = 0;
   }
-  if (hcan1.pRxMsg->Data[0] == 'h'){
+  if (hcan1.pRxMsg->Data[2] == 'h'){
 	  lock2 = 0;
   }
   /* USER CODE END CAN1_RX0_IRQn 1 */
