@@ -81,7 +81,7 @@ void i2cInit();
 void CANFilter(CAN_FilterConfTypeDef *filter);
 float readTemperature();
 uint8_t readHumidity();
-float readCan();
+void readCan();
 void send(char topic[], float value);
 /* USER CODE END PFP */
 
@@ -135,16 +135,14 @@ int main(void)
 		  temperature = readTemperature();
 		  send("sensornode/1/temperature", temperature);
 
-		  temperature = readCan();
-	  	  send("sensornode/2/temperature", temperature);
+		  readCan();
 	  	  lock1 = 1;
 	  }
 	  if (lock2 == 0){
 		  humidity = readHumidity();
 		  send("sensornode/1/humidity", humidity);
 
-		  humidity = readCan();
-		  send("sensornode/2/humidity", humidity);
+		  readCan();
 		  lock2 = 1;
 	  }
   /* USER CODE END WHILE */
@@ -304,37 +302,42 @@ uint8_t readHumidity()
 	return humidity;
 }
 
-float readCan()
+void readCan()
 {
 	// format of received string: <node id>, <sensor type (t-temperature, h-humidity)>, <sensor value>
 	char receiveString[30]; // message from another sensor node
+	char topic[30]; // MQTT topic name
 	char data[5]; // sensor value
-	char dataName; // sensor type (t-temperature, h-humidity)
+	char sensorType; // sensor type (t-temperature, h-humidity)
 	char* subString; // for split message
-	uint8_t nodeId; // id of sender node
+	char nodeId[3]; // id of sender node
 	float temperature; // value of temperature
 	int8_t humidity; // value of humidity
 
 	strcpy(receiveString, (char *)hcan1.pRxMsg->Data);
 	subString = strtok(receiveString, ",");
-	nodeId = (uint8_t)*subString;
+	strcpy(nodeId, subString);
 	subString = strtok(NULL, ",");
-	dataName = *subString;
+	sensorType = *subString;
 	subString = strtok(NULL, ",");
 	strcpy(data, subString);
 
-	switch (dataName)
+	strcpy(topic, "sensornode/");
+	strcat(topic, nodeId);
+
+	switch (sensorType)
 	{
 		case 't':
+			strcat(topic, "/temperature");
 			sscanf(data, "%f", (float *)&temperature);
-			return temperature;
+			send(topic, temperature);
 			break;
 		case 'h':
+			strcat(topic, "/humidity");
 			sscanf(data, "%d", (int *)&humidity);
-			return humidity;
+			send(topic, humidity);
 			break;
 	}
-	return 0;
 }
 
 void send(char topic[], float value)
