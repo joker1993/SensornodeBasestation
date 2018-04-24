@@ -89,6 +89,7 @@ float readTemperature();
 uint8_t readHumidity();
 void readCan();
 void send(char topic[], float value);
+void setTopic(char subTopic[]);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -145,16 +146,9 @@ int main(void)
 		  temperature = readTemperature();
 		  humidity = readHumidity();
 
-		  strcpy(topic, "sensornode/");
-		  strcat(topic, nodeId);
-		  strcat(topic, "/");
-		  strcat(topic, "temperature");
+		  setTopic("temperature");
 		  send(topic, temperature);
-
-		  strcpy(topic, "sensornode/");
-		  strcat(topic, nodeId);
-		  strcat(topic, "/");
-		  strcat(topic, "humidity");
+		  setTopic("humidity");
 		  send(topic, humidity);
 
 		  timer2Lock = 1;
@@ -377,6 +371,14 @@ void send(char topic[], float value)
 	strcat(payload, "\n");
 
 	HAL_UART_Transmit(&hlpuart1, (uint8_t *)payload, strlen(payload), 1000);
+}
+
+void setTopic(char subTopic[])
+{
+	strcpy(topic, "sensornode/");
+	strcat(topic, nodeId);
+	strcat(topic, "/");
+    strcat(topic, subTopic);
 }
 /* USER CODE END 4 */
 
