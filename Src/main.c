@@ -47,7 +47,7 @@
 /* USER CODE BEGIN Includes */
 #include <string.h>
 
-#define NODEID 1 // id of sensornode
+#define NODEID 1 // id of sensor node
 #define SHT_ADDRESS (0x44 << 1) // I2C address of SHT31-DIS-B sensor
 #define SHT_MEASURE_COMMAND 0x2400 // measurement command for SHT31-DIS-B sensor
 /* USER CODE END Includes */
@@ -65,6 +65,10 @@ static uint8_t humidity; // value of humidity
 static CanTxMsgTypeDef txMessage;
 static CanRxMsgTypeDef rxMessage;
 static CAN_FilterConfTypeDef  filterConfig;
+
+static char nodeId[3]; // id of sensor node
+static char topic[30]; // MQTT topic name
+
 
 uint8_t timer2Lock = 1;
 uint8_t canLock = 1;
@@ -129,6 +133,8 @@ int main(void)
   canInit();
   i2cInit();
   timerInit();
+
+  sprintf(nodeId, "%d", NODEID);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -138,8 +144,18 @@ int main(void)
 	  if (timer2Lock == 0){
 		  temperature = readTemperature();
 		  humidity = readHumidity();
-		  send("sensornode/1/temperature", temperature);
-		  send("sensornode/1/humidity", humidity);
+
+		  strcpy(topic, "sensornode/");
+		  strcat(topic, nodeId);
+		  strcat(topic, "/");
+		  strcat(topic, "temperature");
+		  send(topic, temperature);
+
+		  strcpy(topic, "sensornode/");
+		  strcat(topic, nodeId);
+		  strcat(topic, "/");
+		  strcat(topic, "humidity");
+		  send(topic, humidity);
 
 		  timer2Lock = 1;
 	  }
