@@ -5234,13 +5234,13 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.15
  .text.readHumidity
                 0x08004288       0x70 Src/main.o
                 0x08004288                readHumidity
- .text.send     0x080042f8       0x74 Src/main.o
-                0x080042f8                send
- .text.readCan  0x0800436c       0xdc Src/main.o
-                0x0800436c                readCan
  .text.setTopic
-                0x08004448       0x40 Src/main.o
-                0x08004448                setTopic
+                0x080042f8       0x40 Src/main.o
+                0x080042f8                setTopic
+ .text.send     0x08004338       0x74 Src/main.o
+                0x08004338                send
+ .text.readCan  0x080043ac       0xdc Src/main.o
+                0x080043ac                readCan
  .text._Error_Handler
                 0x08004488        0x2 Src/main.o
                 0x08004488                _Error_Handler
@@ -6017,7 +6017,7 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.15
                 0x0000105b       0x22 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
 OUTPUT(SensornodeBasestation.elf elf32-littlearm)
 
-.debug_info     0x00000000    0x24135
+.debug_info     0x00000000    0x24133
  .debug_info    0x00000000     0x1376 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
  .debug_info    0x00001376     0x143d Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o
  .debug_info    0x000027b3     0x173f Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
@@ -6035,15 +6035,15 @@ OUTPUT(SensornodeBasestation.elf elf32-littlearm)
  .debug_info    0x00017c3c     0x156f Src/can.o
  .debug_info    0x000191ab      0xe43 Src/gpio.o
  .debug_info    0x00019fee     0x1355 Src/i2c.o
- .debug_info    0x0001b343     0x2c15 Src/main.o
- .debug_info    0x0001df58      0xf9e Src/stm32l4xx_hal_msp.o
- .debug_info    0x0001eef6     0x1838 Src/stm32l4xx_it.o
- .debug_info    0x0002072e      0xe03 Src/system_stm32l4xx.o
- .debug_info    0x00021531     0x1549 Src/tim.o
- .debug_info    0x00022a7a     0x1629 Src/usart.o
- .debug_info    0x000240a3       0x92 startup/startup_stm32l496xx.o
+ .debug_info    0x0001b343     0x2c13 Src/main.o
+ .debug_info    0x0001df56      0xf9e Src/stm32l4xx_hal_msp.o
+ .debug_info    0x0001eef4     0x1838 Src/stm32l4xx_it.o
+ .debug_info    0x0002072c      0xe03 Src/system_stm32l4xx.o
+ .debug_info    0x0002152f     0x1549 Src/tim.o
+ .debug_info    0x00022a78     0x1629 Src/usart.o
+ .debug_info    0x000240a1       0x92 startup/startup_stm32l496xx.o
 
-.debug_abbrev   0x00000000     0x3ed7
+.debug_abbrev   0x00000000     0x3eef
  .debug_abbrev  0x00000000      0x2ec Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
  .debug_abbrev  0x000002ec      0x2dc Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o
  .debug_abbrev  0x000005c8      0x3b8 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
@@ -6061,13 +6061,13 @@ OUTPUT(SensornodeBasestation.elf elf32-littlearm)
  .debug_abbrev  0x000028b3      0x27b Src/can.o
  .debug_abbrev  0x00002b2e      0x229 Src/gpio.o
  .debug_abbrev  0x00002d57      0x256 Src/i2c.o
- .debug_abbrev  0x00002fad      0x37e Src/main.o
- .debug_abbrev  0x0000332b      0x232 Src/stm32l4xx_hal_msp.o
- .debug_abbrev  0x0000355d      0x275 Src/stm32l4xx_it.o
- .debug_abbrev  0x000037d2      0x226 Src/system_stm32l4xx.o
- .debug_abbrev  0x000039f8      0x26e Src/tim.o
- .debug_abbrev  0x00003c66      0x25f Src/usart.o
- .debug_abbrev  0x00003ec5       0x12 startup/startup_stm32l496xx.o
+ .debug_abbrev  0x00002fad      0x396 Src/main.o
+ .debug_abbrev  0x00003343      0x232 Src/stm32l4xx_hal_msp.o
+ .debug_abbrev  0x00003575      0x275 Src/stm32l4xx_it.o
+ .debug_abbrev  0x000037ea      0x226 Src/system_stm32l4xx.o
+ .debug_abbrev  0x00003a10      0x26e Src/tim.o
+ .debug_abbrev  0x00003c7e      0x25f Src/usart.o
+ .debug_abbrev  0x00003edd       0x12 startup/startup_stm32l496xx.o
 
 .debug_loc      0x00000000     0xf044
  .debug_loc     0x00000000       0xf8 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
@@ -6254,7 +6254,7 @@ OUTPUT(SensornodeBasestation.elf elf32-littlearm)
  .debug_macro   0x0002b659      0x342 Src/tim.o
  .debug_macro   0x0002b99b      0x34c Src/usart.o
 
-.debug_line     0x00000000    0x12024
+.debug_line     0x00000000    0x12022
  .debug_line    0x00000000      0xaf1 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
  .debug_line    0x00000af1      0xd26 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o
  .debug_line    0x00001817      0xa8a Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
@@ -6272,13 +6272,13 @@ OUTPUT(SensornodeBasestation.elf elf32-littlearm)
  .debug_line    0x0000cdba      0x8e9 Src/can.o
  .debug_line    0x0000d6a3      0x8bd Src/gpio.o
  .debug_line    0x0000df60      0x8ea Src/i2c.o
- .debug_line    0x0000e84a      0xa5f Src/main.o
- .debug_line    0x0000f2a9      0x8b2 Src/stm32l4xx_hal_msp.o
- .debug_line    0x0000fb5b      0x99b Src/stm32l4xx_it.o
- .debug_line    0x000104f6      0x8e7 Src/system_stm32l4xx.o
- .debug_line    0x00010ddd      0x8db Src/tim.o
- .debug_line    0x000116b8      0x8ed Src/usart.o
- .debug_line    0x00011fa5       0x7f startup/startup_stm32l496xx.o
+ .debug_line    0x0000e84a      0xa5d Src/main.o
+ .debug_line    0x0000f2a7      0x8b2 Src/stm32l4xx_hal_msp.o
+ .debug_line    0x0000fb59      0x99b Src/stm32l4xx_it.o
+ .debug_line    0x000104f4      0x8e7 Src/system_stm32l4xx.o
+ .debug_line    0x00010ddb      0x8db Src/tim.o
+ .debug_line    0x000116b6      0x8ed Src/usart.o
+ .debug_line    0x00011fa3       0x7f startup/startup_stm32l496xx.o
 
 .debug_str      0x00000000    0xfe497
  .debug_str     0x00000000    0xf8d81 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o

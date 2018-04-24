@@ -69,7 +69,6 @@ static CAN_FilterConfTypeDef  filterConfig;
 static char nodeId[3]; // id of sensor node
 static char topic[30]; // MQTT topic name
 
-
 uint8_t timer2Lock = 1;
 uint8_t canLock = 1;
 /* USER CODE END PV */
@@ -88,8 +87,8 @@ void CANFilter(CAN_FilterConfTypeDef *filter);
 float readTemperature();
 uint8_t readHumidity();
 void readCan();
-void send(char topic[], float value);
 void setTopic(char subTopic[]);
+void send(char topic[], float value);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -100,7 +99,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  sprintf(nodeId, "%d", NODEID); // save node id into a character array
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -134,8 +133,6 @@ int main(void)
   canInit();
   i2cInit();
   timerInit();
-
-  sprintf(nodeId, "%d", NODEID);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -292,10 +289,9 @@ float readTemperature()
 	uint8_t read = -1;
 	float temperature;
 
-//	HAL_I2C_Mem_Read(&hi2c1, SHT_ADDRESS, SHT_MEASURE_COMMAND, 2, shtMeasureData, 5, 1000);
 	while (ready != 0 && read != 0){
 		ready = HAL_I2C_IsDeviceReady(&hi2c1, SHT_ADDRESS, 3, 1000); // check connection to SHT sensor
-		read = HAL_I2C_Mem_Read(&hi2c1, SHT_ADDRESS, SHT_MEASURE_COMMAND, 2, shtMeasureData, 5, 1000); // read from SHT sensor
+		read = HAL_I2C_Mem_Read(&hi2c1, SHT_ADDRESS, SHT_MEASURE_COMMAND, 2, shtMeasureData, 3, 1000); // read from SHT sensor
 	}
 
 	st = shtMeasureData[0]*256 + shtMeasureData[1]; // raw sensor output for temperature
@@ -359,6 +355,14 @@ void readCan()
 	}
 }
 
+void setTopic(char subTopic[])
+{
+	strcpy(topic, "sensornode/");
+	strcat(topic, nodeId);
+	strcat(topic, "/");
+    strcat(topic, subTopic);
+}
+
 void send(char topic[], float value)
 {
 	char data[10];
@@ -371,14 +375,6 @@ void send(char topic[], float value)
 	strcat(payload, "\n");
 
 	HAL_UART_Transmit(&hlpuart1, (uint8_t *)payload, strlen(payload), 1000);
-}
-
-void setTopic(char subTopic[])
-{
-	strcpy(topic, "sensornode/");
-	strcat(topic, nodeId);
-	strcat(topic, "/");
-    strcat(topic, subTopic);
 }
 /* USER CODE END 4 */
 
